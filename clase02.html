@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproducir Audio</title>
+    <title> Audio</title>
     <!-- Incluyendo Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -30,7 +30,7 @@
         </div>
 
         <div class="p-2">
-            <button id="btnPlay" class="btn btn-success mt-3 " onclick="reproducirTodo()"> <i class="fa fa-play-circle" aria-hidden="true"></i>
+            <button id="btnPlay" class="btn btn-success mt-3 " onclick="Todo()"> <i class="fa fa-play-circle" aria-hidden="true"></i>
                  Vocabulario </button>
             <button id="btnStop" class="btn btn-danger mt-3" onclick="detenerTodo()"><i class="fa fa-stop" aria-hidden="true"></i> Stop</button>
         </div>
@@ -66,6 +66,9 @@
         <audio id="audio09" src="./mp3/c2_09.mp3" controls>
             Tu navegador no soporta el elemento de audio.
         </audio>
+        <audio id="audio10" src="./mp3/c2_10.mp3" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
 
         <audio id="audio11" src="./mp3/c2_11.mp3" controls>
             Tu navegador no soporta el elemento de audio.
@@ -75,18 +78,23 @@
             Tu navegador no soporta el elemento de audio.
         </audio>
 
+        <div>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio01')"> Audio 1 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio02')"> Audio 2 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio03')"> Audio 3 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio04')"> Audio 4 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio05')"> Audio 5 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio06')"> Audio 6 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio07')"> Audio 7 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio08')"> Audio 8 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio09')"> Audio 9 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio10')"> Audio 10 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio11')"> Audio 11 </button>
+            <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio12')"> Audio 12 </button>
+       
+        </div>
         <!-- Botones para activar los audios de manera independiente -->
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio01')">Reproducir Audio 1 indefinidamente</button>
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio02')">Reproducir Audio 2 indefinidamente</button>
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio03')">Reproducir Audio 3 indefinidamente</button>
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio04')">Reproducir Audio 4 indefinidamente</button>
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio05')">Reproducir Audio 5 indefinidamente</button>
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio06')">Reproducir Audio 6 indefinidamente</button>
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio07')">Reproducir Audio 7 indefinidamente</button>
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio08')">Reproducir Audio 8 indefinidamente</button>
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio09')">Reproducir Audio 9 indefinidamente</button>
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio11')">Reproducir Audio 9 indefinidamente</button>
-        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio12')">Reproducir Audio 9 indefinidamente</button>
+     
     </div>
 
     <!-- Incluyendo Bootstrap JS -->
@@ -97,7 +105,7 @@
         let isPlaying = false;
         let currentAudioIndex = 0;
         let isBackgroundMusicPlaying = false;  // Controla la música de fondo
-        let currentlyPlayingIndefinitely = null;  // Controla qué audio está sonando indefinidamente
+        let currentlyPlayingIndefinitely = null;  // Controla qué audio está sonando 
 
         // Lista de los elementos de audio
         const audios = [
@@ -116,26 +124,26 @@
         ];
         const backgroundAudio = document.getElementById("backgroundAudio");
 
-        // Función para reproducir todos los audios en secuencia y repetir
-        function reproducirTodo() {
+        // Función para  todos los audios en secuencia y repetir
+        function Todo() {
             if (isPlaying) return;  // Evitar que se inicie si ya está reproduciendo
 
             isPlaying = true;
             currentAudioIndex = 0;
             document.getElementById("btnPlay").disabled = true;  // Deshabilitar el botón de reproducción
 
-            // Reproducir los otros audios en secuencia
+            //  los otros audios en secuencia
             const playNextAudio = () => {
                 if (currentAudioIndex < audios.length) {
                     const audio = audios[currentAudioIndex];
                     audio.play();
                     audio.onended = () => {
                         currentAudioIndex++;
-                        playNextAudio(); // Reproducir el siguiente audio
+                        playNextAudio(); //  el siguiente audio
                     };
                 } else {
                     currentAudioIndex = 0; // Reiniciar la secuencia
-                    playNextAudio(); // Volver a reproducir desde el inicio
+                    playNextAudio(); // Volver a  desde el inicio
                 }
             };
 
@@ -158,7 +166,7 @@
             if (currentlyPlayingIndefinitely) {
                 const audio = document.getElementById(currentlyPlayingIndefinitely);
                 audio.pause();
-                audio.currentTime = 0;  // Reiniciar audio que estaba sonando indefinidamente
+                audio.currentTime = 0;  // Reiniciar audio que estaba sonando 
                 currentlyPlayingIndefinitely = null;
             }
         }
@@ -167,29 +175,29 @@
         function toggleBackgroundMusic() {
             if (isBackgroundMusicPlaying) {
                 backgroundAudio.pause();  // Detener música de fondo
-                document.getElementById("btnBackgroundPlay").textContent = "Reproducir música de fondo";
+                document.getElementById("btnBackgroundPlay").textContent = " música de fondo";
             } else {
-                backgroundAudio.play();  // Reproducir música de fondo
+                backgroundAudio.play();  //  música de fondo
                 document.getElementById("btnBackgroundPlay").textContent = "Detener música de fondo";
             }
 
             isBackgroundMusicPlaying = !isBackgroundMusicPlaying;  // Cambiar el estado de la música de fondo
         }
 
-        // Función para reproducir un audio indefinidamente
+        // Función para  un audio 
         function playIndefinitely(audioId) {
-            // Detener el audio que estaba sonando indefinidamente (si hay alguno)
+            // Detener el audio que estaba sonando  (si hay alguno)
             if (currentlyPlayingIndefinitely) {
                 const currentAudio = document.getElementById(currentlyPlayingIndefinitely);
                 currentAudio.pause();
                 currentAudio.currentTime = 0;  // Reiniciar audio anterior
             }
 
-            // Reproducir el nuevo audio indefinidamente
+            //  el nuevo audio 
             const audio = document.getElementById(audioId);
             audio.loop = true;  // Activar repetición
             audio.play();
-            currentlyPlayingIndefinitely = audioId;  // Establecer el audio que está sonando indefinidamente
+            currentlyPlayingIndefinitely = audioId;  // Establecer el audio que está sonando 
         }
 
         // Función para cambiar la velocidad de reproducción
