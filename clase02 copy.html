@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproducir Audio</title>
+    <!-- Incluyendo Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container text-center mt-4">
+        <h1>Reproducir Todos los Audios</h1>
+        
+        <!-- Controles para la música de fondo -->
+        <audio id="backgroundAudio" src="sonidos/musica01.mp3" loop> <!-- Música de fondo con repetición -->
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        <button id="btnBackgroundPlay" class="btn btn-primary mt-3" onclick="toggleBackgroundMusic()">Reproducir música de fondo</button>
+        
+        <!-- Botones de control para los otros audios -->
+        <button id="btnPlay" class="btn btn-success mt-3" onclick="reproducirTodo()">Reproducir todo</button>
+        <button id="btnStop" class="btn btn-danger mt-3" onclick="detenerTodo()">Detener</button>
+        
+        <!-- Elementos de audio -->
+        <audio id="audio01" src="./mp3/c2_01.mp3" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        <audio id="audio02" src="./mp3/c2_02.mp3" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        <audio id="audio03" src="./mp3/c2_03.mp3" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        <audio id="audio04" src="./mp3/c2_04.mp3" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        <audio id="audio05" src="./mp3/c2_05.mp3" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        <audio id="audio06" src="./mp3/c2_06.mp3" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        <audio id="audio07" src="./mp3/c2_07.mp3" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <!-- Incluyendo Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Variables de control
+        let isPlaying = false;
+        let currentAudioIndex = 0;
+        let isBackgroundMusicPlaying = false;  // Controla la música de fondo
+
+        // Lista de los elementos de audio
+        const audios = [
+            document.getElementById("audio01"),
+            document.getElementById("audio02"),
+            document.getElementById("audio03"),
+            document.getElementById("audio04"),
+            document.getElementById("audio05"),
+            document.getElementById("audio06"),
+            document.getElementById("audio07")
+        ];
+        const backgroundAudio = document.getElementById("backgroundAudio");
+
+        // Función para reproducir todos los audios en secuencia y repetir
+        function reproducirTodo() {
+            if (isPlaying) return;  // Evitar que se inicie si ya está reproduciendo
+
+            isPlaying = true;
+            currentAudioIndex = 0;
+            document.getElementById("btnPlay").disabled = true;  // Deshabilitar el botón de reproducción
+
+            // Reproducir los otros audios en secuencia
+            const playNextAudio = () => {
+                if (currentAudioIndex < audios.length) {
+                    const audio = audios[currentAudioIndex];
+                    audio.play();
+                    audio.onended = () => {
+                        currentAudioIndex++;
+                        playNextAudio(); // Reproducir el siguiente audio
+                    };
+                } else {
+                    currentAudioIndex = 0; // Reiniciar la secuencia
+                    playNextAudio(); // Volver a reproducir desde el inicio
+                }
+            };
+
+            playNextAudio(); // Iniciar la secuencia
+        }
+
+        // Función para detener todos los audios
+        function detenerTodo() {
+            isPlaying = false;
+            document.getElementById("btnPlay").disabled = false;  // Habilitar el botón de reproducción
+            backgroundAudio.pause();  // Detener música de fondo
+            backgroundAudio.currentTime = 0;  // Reiniciar música de fondo
+
+            // Detener los otros audios
+            document.querySelectorAll('audio').forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;  // Reiniciar el tiempo de los audios
+            });
+        }
+
+        // Función para alternar la reproducción de la música de fondo
+        function toggleBackgroundMusic() {
+            if (isBackgroundMusicPlaying) {
+                backgroundAudio.pause();  // Detener música de fondo
+                document.getElementById("btnBackgroundPlay").textContent = "Reproducir música de fondo";
+            } else {
+                backgroundAudio.play();  // Reproducir música de fondo
+                document.getElementById("btnBackgroundPlay").textContent = "Detener música de fondo";
+            }
+
+            isBackgroundMusicPlaying = !isBackgroundMusicPlaying;  // Cambiar el estado de la música de fondo
+        }
+    </script>
+</body>
+
+</html>
