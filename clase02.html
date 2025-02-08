@@ -67,6 +67,14 @@
             Tu navegador no soporta el elemento de audio.
         </audio>
 
+        <audio id="audio11" src="./mp3/c2_11.mp3" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        
+        <audio id="audio12" src="./mp3/c2_12.mp3" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+
         <!-- Botones para activar los audios de manera independiente -->
         <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio01')">Reproducir Audio 1 indefinidamente</button>
         <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio02')">Reproducir Audio 2 indefinidamente</button>
@@ -77,6 +85,8 @@
         <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio07')">Reproducir Audio 7 indefinidamente</button>
         <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio08')">Reproducir Audio 8 indefinidamente</button>
         <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio09')">Reproducir Audio 9 indefinidamente</button>
+        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio11')">Reproducir Audio 9 indefinidamente</button>
+        <button class="btn btn-warning mt-3" onclick="playIndefinitely('audio12')">Reproducir Audio 9 indefinidamente</button>
     </div>
 
     <!-- Incluyendo Bootstrap JS -->
@@ -99,7 +109,10 @@
             document.getElementById("audio06"),
             document.getElementById("audio07"),
             document.getElementById("audio08"),
-            document.getElementById("audio09")
+            document.getElementById("audio09"),
+            document.getElementById("audio10"),
+            document.getElementById("audio11"),
+            document.getElementById("audio12"),
         ];
         const backgroundAudio = document.getElementById("backgroundAudio");
 
