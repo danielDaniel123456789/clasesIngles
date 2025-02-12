@@ -9,7 +9,9 @@ function historia01() {
             historia04: "Canción 4",
             historia05: "Canción 5",
             historia06: "Canción 6",
-            historia07: "Canción 7"
+            historia07: "Canción 7",
+            historia08: "Canción 8",
+            historia09: "Canción 9"
         },
         inputPlaceholder: "Elige una canción",
         showCancelButton: true,
@@ -24,6 +26,13 @@ function historia01() {
 
 function reproducirHistoria(id) {
     let audio = document.getElementById(id);
+    
+    if (!audio) {
+        Swal.fire("Error", "No se encontró el audio.", "error");
+        return;
+    }
+
+    audio.loop = true; // Repite el audio indefinidamente
 
     Swal.fire({
         title: "Reproduciendo Audio",
@@ -38,6 +47,7 @@ function reproducirHistoria(id) {
         preConfirm: () => {
             audio.pause();
             audio.currentTime = 0; // Reinicia el audio
+            audio.loop = false; // Detiene el loop cuando se detiene la reproducción
         }
     });
 }
