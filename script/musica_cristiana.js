@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Establecer el volumen bajo para todos los audios con la clase .musicaCristiana
     let audios = document.querySelectorAll(".musicaCristiana");
     audios.forEach(audio => {
-        audio.volume = 0.1; // Ajustar volumen al 20% por defecto
+        audio.volume = 0.2; // Ajustar volumen al 5% por defecto para que suene más bajo
     });
 });
 
@@ -46,9 +46,10 @@ function musica_cristiana() {
             if (selectedAudio) {
                 let audioElement = document.getElementById(selectedAudio);
                 if (audioElement) {
-                 //   detenerTodo(); // Detener otros audios antes de reproducir
-                    // Ajustar el volumen del audio seleccionado (opcionalmente puedes mantenerlo al 30% o al 50%)
-                    audioElement.volume = 0.3; // Ajustar volumen a 30% para el audio seleccionado
+                    // Detener otros audios antes de reproducir el nuevo
+                    detenerTodo();
+                    // Ajustar el volumen del audio seleccionado a 30%
+                    audioElement.volume = 0.3; // Sonará más bajo, pero aún audible
                     audioElement.play();
                     Swal.fire('Reproduciendo', `Ahora suena: ${audioFiles[selectedAudio]}`, 'success');
                 } else {
@@ -59,4 +60,11 @@ function musica_cristiana() {
     });
 }
 
-
+// Función para detener todos los audios antes de reproducir uno nuevo
+function detenerTodo() {
+    let audios = document.querySelectorAll(".musicaCristiana");
+    audios.forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
+}
